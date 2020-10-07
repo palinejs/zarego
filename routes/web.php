@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProspectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('index');
+
+Route::get('/video', function(){
+	return view('video');
+})->name('video');
+
+Route::get('/prospects', [ProspectController::class, 'create'])->name('prospect.index');
+Route::post('/prospects', [ProspectController::class, 'store'])->name('prospect.store');
+
