@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\Welcome as WelcomeEmail;
 use App\Models\Prospect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -48,9 +49,12 @@ class ProspectController extends Controller
             'unique' => 'Este email ya fue registrado',
         ]);
 
+
         if($validator->fails()){
-            //dd($validator->errors());
-            return back()->withErrors($validator);
+            if(Arr::has($validator->failed(), 'email.Unique')){
+                return back()->with('success', 'Ya se encontraba registrado con anterioridad.');
+            }
+            return back()->withInput()->withErrors($validator);
         }
 
         Prospect::create($request->all());
@@ -59,7 +63,7 @@ class ProspectController extends Controller
             ->send(new WelcomeEmail($request->get('name').' '.$request->get('lastname')));
         
     
-        return back()->with('success', 'Gracias por compartirnos tu contacto!');
+        return back()->with('success', 'Siga las instrucciones del mail enviado para instalar nuestra app.');
     }
 
     /**

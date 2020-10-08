@@ -12,14 +12,14 @@
 
 		<div class="col-sm-4 menu-video">
 			<a href="{{ route('prospect.index') }}">
-				<img src="http://prospects.cabify.zarego.com/img/conocer.png" class="img-responsive" border="0">
+				<img src="{{ asset('img/conocer.png') }}" class="img-responsive" border="0">
 			</a>
 		</div>
 		
 		<div class="col-sm-4"></div>
 		
 		<div class="col-sm-12 footer">
-			<img src="http://prospects.cabify.zarego.com/img/footer.png" class="img-responsive" border="0">
+			<img src="{{ asset('img/footer.png') }}" class="img-responsive" border="0">
 		</div>
 	</div>
 @endsection
